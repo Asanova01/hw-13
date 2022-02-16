@@ -54,25 +54,45 @@ body {
 }
 .liUser.invalid input{
     border: 2px solid brown;
-    background-color: rgb(226, 143, 128);
-	color: whitesmoke;
 	border-radius: 4px;
 }
 .liPassword.invalid input{
     border: 2px solid brown;
-    background-color: rgb(226, 143, 128);
-	color: whitesmoke;
 	border-radius: 4px;
 }
 .liEmail.invalid input{
     border: 2px solid brown;
-    background-color: rgb(226, 143, 128);
-	color: whitesmoke;
+	border-radius: 4px;
+}
+.liUser.isvalid input{
+    border: 2px solid rgb(42, 99, 165);
+	border-radius: 4px;
+}
+.liPassword.isvalid input{
+    border: 2px solid rgb(42, 99, 165);
+	border-radius: 4px;
+}
+.liEmail.isvalid input{
+    border: 2px solid rgb(42, 99, 165);
 	border-radius: 4px;
 }
 .p{
 	font-size: 13px;
-	position: relative;
-	left: -70px;
-	color: rgba(30, 30, 30, 0.8);
+	width: 274px;
+	text-align: center;
+	 position: absolute;
+	/* top: 143px;
+	left: 419px;  */
+	/* transform: translateX(308px); */
+	margin-left: 107px;
+	transform: translateY(-25px);
+	
+	animation: alert ease-in-out 0.4s;
+}
+@keyframes alert {
+	0%{
+		opacity: 0;
+	}100%{
+		opacity: 1;
+	}
 }

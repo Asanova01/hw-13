@@ -5,18 +5,18 @@ export const LoginContext = React.createContext()
 
 const initialState = {
 	userName : {
-		user : '',
-	    styleIsvalid : null,
+		userValue : '',
+	    Isvalid : null,
 		errorMassage : '',
 	},
 	email : {
 	    emailValue: '',
-		styleIsvalid :null,
+		Isvalid :null,
 		errorMassage : '',
 	},
 	password : {
 		passwordValue : '',
-	    styleIsvalid : null,
+	    Isvalid : null,
 		errorMassage : '',
 	},
     loginData : []
@@ -27,8 +27,8 @@ const loginReducer = (state,action) =>{
 			return{
 				...state,
 				userName : {
-					user : action.value,
-					styleIsvalid :  validateUserName.test(action.value) &&  true
+					userValue : action.value,
+					Isvalid :  validateUserName.test(action.value) &&  true
 				}
 			}
 		case 'INPUTUSERBLUR' :
@@ -36,8 +36,8 @@ const loginReducer = (state,action) =>{
 				...state,
 				userName : {
 					...state.userName,
-					user : state.userName.user,
-					errorMassage :  validateUserName.test(state.userName.user) ? '' : ( state.userName.user === "") ? 'напишите login' : 'некорректный login',
+					userValue : state.userName.userValue,
+					errorMassage :  validateUserName.test(state.userName.userValue) ? null : ( state.userName.userValue === "") ? 'Введите логин!' : 'некорректный логин!',
 				},
 			}
 		case  'EMAIL' : 
@@ -45,7 +45,7 @@ const loginReducer = (state,action) =>{
 				...state,
 				email : {
 					emailValue : action.value,
-					styleIsvalid : validEmailRegex.test(action.value) && true
+					Isvalid : validEmailRegex.test(action.value) && true
 				}
 			}
 		case 'INPUTEMAILBLUR' : 
@@ -54,7 +54,7 @@ const loginReducer = (state,action) =>{
 				email : {
 					...state.email,
 					emailValue : state.email.emailValue,
-					errorMassage : validEmailRegex.test(state.email.emailValue) ? '' : ( state.email.emailValue === "") ? 'напишите email' : 'некорректный email'
+					errorMassage : validEmailRegex.test(state.email.emailValue) ? null : ( state.email.emailValue === "") ? 'Укажите адрес Email' : 'Email должно содержать от 6 до 30 символов'
 
 				},
 
@@ -66,7 +66,7 @@ const loginReducer = (state,action) =>{
 			...state,
 			password : {
 				passwordValue : valuePass + index12,
-				styleIsvalid : validatPassword.test(action.value) && true
+				Isvalid : validatPassword.test(action.value) && true
 			}
 		}
 		case 'PASSWORDBLUR' :
@@ -75,7 +75,7 @@ const loginReducer = (state,action) =>{
 				password : {
 					...state.password,
 					passwordValue : state.password.passwordValue,
-					errorMassage : validatPassword.test(state.password.passwordValue) ? '' : ( state.password.passwordValue === "") ? 'напишите пароль' : 'не надежный пароль'
+					errorMassage : validatPassword.test(state.password.passwordValue) ? null : ( state.password.passwordValue === "") ? 'Введите пароль' : 'ненадёжный пароль'
 				}
 			}
         case 'LOGIN' :
@@ -100,7 +100,6 @@ const LoginContextProvider = (props) => {
    <LoginContext.Provider value={{
        dispatchLogin,state
    }}>
-       {console.log(state.loginData)}
       {props.children}
    </LoginContext.Provider>
   )

@@ -5,6 +5,7 @@ import Button from './UI/Button'
 import Card from './UI/Card'
 import { LoginContext } from '../Store/context-login'
 import { useNavigate } from 'react-router-dom'
+import { Alert } from '@mui/material'
 
 const Login = () => {
 	const [validateForm, setValidateForm] = useState(false)
@@ -14,14 +15,14 @@ const Login = () => {
 	useEffect(() => {
 		console.log('valid')
 		setValidateForm(
-			state.userName.styleIsvalid &&
-				state.email.styleIsvalid &&
-				state.password.styleIsvalid,
+			state.userName.Isvalid &&
+				state.email.Isvalid &&
+				state.password.Isvalid,
 		)
 	}, [
-		state.userName.styleIsvalid,
-		state.email.styleIsvalid,
-		state.password.styleIsvalid,
+		state.userName.Isvalid,
+		state.email.Isvalid,
+		state.password.Isvalid,
 	])
 
 	const userNameChangeHandler = (e) =>
@@ -46,7 +47,7 @@ const Login = () => {
 	const submitHandler = (e) => {
 		e.preventDefault()
 		const newData = {
-			userName: state.userName.user,
+			userName: state.userName.userValue,
 			email: state.email.emailValue,
 			password: state.password.passwordValue,
 			id: Math.random().toString(),
@@ -67,11 +68,7 @@ const Login = () => {
 			<form className='signupForm'>
 				<h2>Sign Up</h2>
 				<ul className='noBullet'>
-					<li
-						className={`liUser ${
-							state.userName.errorMassage ? 'invalid' : ''
-						}`}
-					>
+					<li className={`liUser ${state.userName.errorMassage ? 'invalid' : (state.userName.errorMassage === null) ? 'isvalid' : ''}`}>
 						<label htmlFor='username'></label>
 						<Input
 							onChange={userNameChangeHandler}
@@ -79,13 +76,9 @@ const Login = () => {
 							placeholder='Username'
 							onBlur={validateUserNameHandler}
 						/>
-						<p className='p'>{state.userName.errorMassage}</p>
+						{state.userName.errorMassage && <Alert className='p' severity="error">{state.userName.errorMassage}</Alert>}
 					</li>
-					<li
-						className={`liPassword ${
-							state.password.errorMassage ? 'invalid' : ''
-						}`}
-					>
+					<li	className={`liPassword ${state.password.errorMassage ? 'invalid' : (state.password.errorMassage === null) ? 'isvalid' : ''}`}>
 						<label htmlFor='password'></label>
 						<Input
 							type='password'
@@ -93,11 +86,11 @@ const Login = () => {
 							onChange={passwordChangeHandler}
 							onBlur={validatePasswordHandler}
 						/>
-						<p className='p'>{state.password.errorMassage}</p>
+						{state.password.errorMassage && <Alert className='p' severity="error">{state.password.errorMassage}</Alert>}
 					</li>
 					<li
 						className={`liEmail ${
-							state.email.errorMassage ? 'invalid' : ''
+							state.email.errorMassage ? 'invalid' : (state.email.errorMassage === null) ? 'isvalid' : ''
 						}`}
 					>
 						<label htmlFor='email'></label>
@@ -107,7 +100,7 @@ const Login = () => {
 							onChange={emailChangeHnahdler}
 							onBlur={validateEmailHandler}
 						/>
-						<p className='p'>{state.email.errorMassage}</p>
+						{state.email.errorMassage && <Alert className='p' severity="error">{state.email.errorMassage}</Alert>}
 						{console.log(state)}
 					</li>
 					<li id='center-btn'>
