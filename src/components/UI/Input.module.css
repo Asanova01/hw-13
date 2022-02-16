@@ -1,0 +1,21 @@
+.inputFields {
+	margin: 15px 0;
+	font-size: 16px;
+	padding: 10px;
+	width: 270px;
+	border: 0.8px solid rgb(147, 150, 150);
+	background: transparent;
+	color: rgb(122, 142, 155);
+	outline: none;
+    transition: 0.2s;
+    opacity: 0.6;
+	transition: 0.3s;
+	border-radius: 4px;
+}
+.inputFields:focus{
+	border: 2px solid rgb(147, 150, 150);
+    opacity: 1;
+}
+.inputFields:hover{
+    opacity: 1 ;
+}

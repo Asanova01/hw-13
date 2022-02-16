@@ -1,0 +1,23 @@
+.join_btn {
+	/* border: 1px solid rgba(10, 180, 180, 1); */
+	border: none;
+	background: rgba(0, 125, 228, 0.6);
+	font-size: 18px;
+	color: rgb(255, 255, 255);
+	font-weight: bold;
+	margin-top: 20px;
+	padding: 10px 50px;
+	cursor: pointer;
+	transition: 0.4s;
+}
+.join_btn:hover {
+	background: rgba(20, 20, 20, 0.8);
+	padding: 10px 80px;
+}
+.join_btn:disabled,
+.join_btn:disabled:hover,
+.join_btn:disabled:active{
+    background: rgba(184, 182, 182, 0.6);
+    color: rgb(117, 80, 80);
+    cursor:not-allowed   ;
+}
