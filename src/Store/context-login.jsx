@@ -16,6 +16,7 @@ const initialState = {
 		passwordValue : '',
 	    styleIsvalid : null
 	},
+    errorMassage : '',
     loginData : []
 }
 const loginReducer = (state,action) =>{
@@ -33,8 +34,8 @@ const loginReducer = (state,action) =>{
 				...state,
 				userName : {
 					user : state.userName.user,
-					styleIsvalid :  validateUserName.test(state.userName.user) ? true : false
-				}
+					styleIsvalid :  validateUserName.test(state.userName.user) ? true : false,
+				},
 			}
 		case  'EMAIL' : 
 		    return{
@@ -44,13 +45,14 @@ const loginReducer = (state,action) =>{
 					styleIsvalid : validEmailRegex.test(action.value) ? true : null
 				}
 			}
-		case 'INPUTEMAILBLUR' :
+		case 'INPUTEMAILBLUR' : 
 			return{
 				...state,
 				email : {
 					emailValue : state.email.emailValue,
 					styleIsvalid : validEmailRegex.test(state.email.emailValue) ? true : false
-				}
+				},
+
 			}
 		case 'PASSWORD' :
 		const index12 =  action.value.split('', 2).join('')

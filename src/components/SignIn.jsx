@@ -16,8 +16,10 @@ const Login = () => {
 
 	const userNameChangeHandler = (e) => dispatchLogin({type : 'USERNAME',value:e.target.value})
 
-	const validateUserNameHandler = () =>dispatchLogin({type : 'INPUTUSERBLUR'})
-	
+	const validateUserNameHandler = () =>{
+		// dispatchLogin({type : 'INPUTUSERBLUR'})
+		// if(state.userName.styleIsvalid)
+	}
 	const emailChangeHnahdler = (e) =>dispatchLogin({type : 'EMAIL',value:e.target.value})
 
 	const validateEmailHandler = () =>dispatchLogin({type : 'INPUTEMAILBLUR'})
@@ -54,7 +56,6 @@ const Login = () => {
 								placeholder='Username'
 								onBlur={validateUserNameHandler}
 							/>
-							{state.userName.styleIsvalid && <p className='p'>User name valid</p>}
 							{state.userName.styleIsvalid === false && <p className='p'>User name invalid</p> }
 						</li>
 						<li className={`liPassword ${state.password.styleIsvalid === false ? 'invalid' : ''}`}>
@@ -65,7 +66,6 @@ const Login = () => {
 								onChange={passwordChangeHandler}
 								onBlur={validatePasswordHandler}
 							/>
-							{state.password.styleIsvalid && <p className='p'>password valid</p>}
 							{state.password.styleIsvalid === false && <p className='p'>password invalid</p> }
 						</li>
 						<li className={`liEmail ${state.email.styleIsvalid === false ? 'invalid' : ''}`}>
@@ -76,8 +76,9 @@ const Login = () => {
 								onChange={emailChangeHnahdler}
 								onBlur = {validateEmailHandler}
 							/>
-							{state.email.styleIsvalid && <p className='p'>Email name valid</p>}
 							{state.email.styleIsvalid === false && <p className='p'>Email invalid</p> }
+							<p className='p'>{state.errorMassage}</p>
+							{console.log(state)}
 						</li>
 						<li id='center-btn'>
 							<Button
