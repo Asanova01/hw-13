@@ -6,17 +6,19 @@ export const LoginContext = React.createContext()
 const initialState = {
 	userName : {
 		user : '',
-	    styleIsvalid : null
+	    styleIsvalid : null,
+		errorMassage : '',
 	},
 	email : {
 	    emailValue: '',
-		styleIsvalid : null
+		styleIsvalid :null,
+		errorMassage : '',
 	},
 	password : {
 		passwordValue : '',
-	    styleIsvalid : null
+	    styleIsvalid : null,
+		errorMassage : '',
 	},
-    errorMassage : '',
     loginData : []
 }
 const loginReducer = (state,action) =>{
@@ -26,15 +28,16 @@ const loginReducer = (state,action) =>{
 				...state,
 				userName : {
 					user : action.value,
-					styleIsvalid :  validateUserName.test(action.value) ? true : null
+					styleIsvalid :  validateUserName.test(action.value) &&  true
 				}
 			}
 		case 'INPUTUSERBLUR' :
 			return{
 				...state,
 				userName : {
+					...state.userName,
 					user : state.userName.user,
-					styleIsvalid :  validateUserName.test(state.userName.user) ? true : false,
+					errorMassage :  validateUserName.test(state.userName.user) ? '' : ( state.userName.user === "") ? 'напишите login' : 'некорректный login',
 				},
 			}
 		case  'EMAIL' : 
@@ -42,15 +45,17 @@ const loginReducer = (state,action) =>{
 				...state,
 				email : {
 					emailValue : action.value,
-					styleIsvalid : validEmailRegex.test(action.value) ? true : null
+					styleIsvalid : validEmailRegex.test(action.value) && true
 				}
 			}
 		case 'INPUTEMAILBLUR' : 
 			return{
 				...state,
 				email : {
+					...state.email,
 					emailValue : state.email.emailValue,
-					styleIsvalid : validEmailRegex.test(state.email.emailValue) ? true : false
+					errorMassage : validEmailRegex.test(state.email.emailValue) ? '' : ( state.email.emailValue === "") ? 'напишите email' : 'некорректный email'
+
 				},
 
 			}
@@ -61,15 +66,16 @@ const loginReducer = (state,action) =>{
 			...state,
 			password : {
 				passwordValue : valuePass + index12,
-				styleIsvalid : validatPassword.test(action.value) ? true : null 
+				styleIsvalid : validatPassword.test(action.value) && true
 			}
 		}
 		case 'PASSWORDBLUR' :
 			return {
 				...state,
 				password : {
+					...state.password,
 					passwordValue : state.password.passwordValue,
-					styleIsvalid : validatPassword.test(state.password.passwordValue) ? true : false
+					errorMassage : validatPassword.test(state.password.passwordValue) ? '' : ( state.password.passwordValue === "") ? 'напишите пароль' : 'не надежный пароль'
 				}
 			}
         case 'LOGIN' :
@@ -79,7 +85,8 @@ const loginReducer = (state,action) =>{
                 loginData : [...state.loginData,action.newData]
                 
             }
-	
+	    case  'CLEAR' : 
+		return initialState
 		default: 
 			return initialState;
 	}
